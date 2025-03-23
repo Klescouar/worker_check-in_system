@@ -13,25 +13,25 @@ export default async function HistoryPage() {
   if (!history.length)
     return (
       <div className="p-6 max-w-4xl mx-auto text-center text-gray-500 text-lg">
-        Aucun événement de présence trouvé.
+        No attendance events found.
       </div>
     );
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">
-        Historique des présences
+        Attendance History
       </h1>
 
       <div className="overflow-x-auto rounded-lg shadow-sm border border-gray-200">
         <table className="min-w-full text-sm text-gray-700">
           <thead className="bg-gray-100 text-left text-xs uppercase tracking-wider text-gray-600">
             <tr>
-              <th className="px-4 py-3">Nom</th>
-              <th className="px-4 py-3">Prénom</th>
-              <th className="px-4 py-3">Chantier</th>
-              <th className="px-4 py-3">Statut</th>
-              <th className="px-4 py-3">Horodatage</th>
+              <th className="px-4 py-3">Last Name</th>
+              <th className="px-4 py-3">First Name</th>
+              <th className="px-4 py-3">Site</th>
+              <th className="px-4 py-3">Status</th>
+              <th className="px-4 py-3">Timestamp</th>
             </tr>
           </thead>
           <tbody>
@@ -52,9 +52,9 @@ export default async function HistoryPage() {
                     }`}
                   >
                     {entry.status === "CHECKED_IN"
-                      ? "Entrée"
+                      ? "Checked In"
                       : entry.status === "CHECKED_OUT"
-                      ? "Sortie"
+                      ? "Checked Out"
                       : entry.status}
                   </span>
                 </td>
