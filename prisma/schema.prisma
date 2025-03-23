@@ -1,0 +1,50 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  firstName String
+  lastName  String
+  role      Role
+  siteId    String
+  checkIn   CheckIn?
+  histories History[]
+}
+
+model CheckIn {
+  id        String        @id @default(uuid())
+  userId    String        @unique
+  user      User          @relation(fields: [userId], references: [id])
+  timestamp DateTime      @default(now())
+  status    CheckInStatus
+}
+
+model History {
+  id        String        @id @default(uuid())
+  userId    String
+  user      User          @relation(fields: [userId], references: [id])
+  siteId    String
+  timestamp DateTime      @default(now())
+  status    CheckInStatus
+
+  @@index([userId])
+  @@index([timestamp])
+  @@index([siteId])
+}
+
+enum Role {
+  worker
+  supervisor
+}
+
+enum CheckInStatus {
+  CHECKED_IN
+  CHECKED_OUT
+}
