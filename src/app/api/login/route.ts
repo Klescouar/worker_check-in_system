@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
 import { Role } from "@/types";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 const userSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
